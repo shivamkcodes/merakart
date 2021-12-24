@@ -3,7 +3,7 @@ const session = require("express-session");
 const cors = require("cors");
 const app = express();
 require("dotenv").config();
-const port = 1900;
+const port = process.env.PORT || 1900;
 
 // utilFunction
 const readfile = require("./utils/readfile");
