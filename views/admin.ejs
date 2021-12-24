@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<%- include ('partials/header.ejs') %>
+    <style>
+        body {
+            overflow-x: hidden;
+            /* Hide scrollbars */
+        }
+    </style>
+
+    <body>
+        <%- include('partials/navbar.ejs',{isLoggedIn : isLoggedIn }) %>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <h1 class="">Welcome Admin </h1>
+
+                    <form action="/addproduct" method="post">
+                        <fieldset>
+                            <input required type="text" class="form-control" name="productName"
+                                placeholder="productName"><br>
+                            <input required type="text" class="form-control" name="productId"
+                                placeholder="productId"><br>
+                            <input required type="text" class="form-control" name="productDescription"
+                                placeholder="productDescription"><br>
+                            <input required type="tel" class="form-control" name="productPrice"
+                                placeholder="productPrice"><br>
+                            <input required type="tel" class="form-control" name="productQuantity"
+                                placeholder="productQuantity"><br>
+                            <input required type="text" class="form-control" name="productImageUrl"
+                                placeholder="ImageUrl" class="
+                                form-control"><br>
+                            <input type="submit" value="Add Product" class="btn btn-primary">
+                        </fieldset>
+                    </form>
+
+                    <h2 class="text-center">All Products</h2>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <% products.forEach(e=>{ %>
+
+
+                        <div class="col-md-4 my-3">
+                            <div class="card my-3" style="margin-top:3vh ;">
+                                <img src="<%=e.image%>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h2 class="card-title">
+                                        <%=e.name%>
+                                    </h2>
+                                    <h4>
+                                        <%=e.price%>
+
+                                    </h4>
+                                    <p class="card-text">Some quick example text to build on the card
+                                        title and make
+                                        up the bulk of the card's content.</p>
+                                </div>
+                                <form action="/updateproduct" method="post">
+
+                                    <input type="hidden" name="productid" value="<%=e.id%>">
+
+                                    <input type="submit" style="float:left;margin-right: 2vw;" class="btn btn-primary"
+                                        value="update">
+                                </form>
+
+
+                                <form action="/deleteproduct" method="post">
+                                    <input type="hidden" name="productid" value="<%=e.id%>">
+
+                                    <input type="submit" style="float:left;margin-right: 2vw;" class="btn btn-danger"
+                                        value="delete">
+                                </form>
+
+
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+                        <% }) %>
+
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+    </body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include ('partials/header.ejs') %>
+
+    <body>
+        <%- include('partials/navbar.ejs',{isLoggedIn : isLoggedIn }) %>
+            <h5> <a href="/">⬅️goback</a> </h5>
+            <div class="row container">
+                <div class="col-md-6">
+                    <h2 class="text-center">
+                        <%=data.name%>
+                    </h2>
+                    <img height="400" width="500" src="<%=data.image%>" alt="">
+                    <br>
+                    <br>
+
+                    <form action="/" method="post">
+
+                        <input type="hidden" name="productid" value="<%=productid%>">
+                        <input type="hidden" name="userid" value="<%=username%>">
+                        <input type="submit" class="btn btn-primary btn-block" value="addtocart">
+                    </form>
+
+                    <!-- <button class="btn btn-block btn-primary">Add to cart</button> -->
+                </div>
+                <div class="col-md-6">
+                    <h2>
+                        Price <%=data.price%>
+                    </h2>
+                    <p>
+                        <%=data.desc%>
+                    </p>
+                </div>
+            </div>
+
+
+    </body>
+
+</html>

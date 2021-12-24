@@ -1,0 +1,1 @@
+[{"email":"shivamguglani306@gmail.com","username":"sam","password":"BqkHxZWDcNWaD6@","mobile":"6398936804","isVerified":true,"token":1640311441452,"cart":{"5":2,"6":1,"7":1,"15":1},"role":0}]

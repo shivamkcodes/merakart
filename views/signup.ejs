@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<%- include ('partials/header.ejs') %>
+
+    <body>
+
+        <%- include('partials/navbar.ejs') %>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+
+
+                    <h1 class="my-3 ">SignUp here</h1>
+                    <% if(error){ %>
+                        <h2 class="text-danger">
+                            <%= error %>
+                        </h2>
+                        <% } %>
+                            <form action="/signup" method="post">
+                                <input type="email" required name="email" placeholder="email" class="form-control">
+                                <br>
+                                <input type="text" required name="username" placeholder="username" class="form-control">
+                                <br>
+                                <input type="password" id="pass" required name="password" placeholder="password"
+                                    class="form-control">
+                                <br>
+
+                                <input type="password" id="conpass" required name="confirmPassword"
+                                    placeholder="confirmPassword" class="form-control">
+                                <br>
+                                <input type="tel" required name="mobile" class="form-control" placeholder="mobile">
+                                <br>
+
+
+                                <input type="submit" id="submit" value="SignUp" class="btn btn-primary">
+                            </form>
+
+                            <br>
+                            <br>
+                            <p>The password has to be</p>
+                            <li>Minimum 8 characters long</li>
+                            <li>One Uppercase letter atleast</li>
+                            <li>One lowercase letter atleast</li>
+                            <li>One Number</li>
+                </div>
+                <div class="col-md-4"></div>
+
+            </div>
+            <script src="signup.js"></script>
+    </body>
+
+</html>

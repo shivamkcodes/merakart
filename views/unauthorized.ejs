@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<%- include ('partials/header.ejs') %>
+
+    <body>
+        <%- include('partials/navbar.ejs',{isLoggedIn : isLoggedIn }) %>
+            <h1 class="text-center text-danger">403, unauthorized... you are not the admin</h1>
+    </body>
+
+</html>

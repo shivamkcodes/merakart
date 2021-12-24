@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include ('partials/header.ejs') %>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+
+    <body>
+        <%- include('partials/navbar.ejs',{isLoggedIn : isLoggedIn }) %>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <h1 class="">Welcome Admin </h1>
+
+                    <form action="/updateandsave" method="post">
+                        <fieldset>
+                            <img src="<%=img%>" alt="">
+                            <br><br>
+
+
+                            <input required type="hidden" class="form-control" required value="<%=id%>" name="productId"
+                                placeholder="productId"><br>
+                            <input required type="text" class="form-control" required value="<%=name%>"
+                                name="productName" placeholder="productName"><br>
+                            <input required type="text" class="form-control" required value="<%=desc%>"
+                                name="productDescription" placeholder="productDescription"><br>
+                            <input required type="tel" class="form-control" required value="<%=price%>"
+                                name="productPrice" placeholder="productPrice"><br>
+                            <input required type="tel" class="form-control" required value="<%=quantity%>"
+                                name="productQuantity" placeholder="productQuantity"><br>
+                            <input required type="text" class="form-control" required value="<%=img%>"
+                                name="productImageUrl" placeholder="ImageUrl" class="
+                                form-control"><br>
+                            <input type="submit" value="Update Product" class="btn btn-primary">
+                        </fieldset>
+                    </form>
+
+
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+
+    </body>
+
+</html>

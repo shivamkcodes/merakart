@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<%- include ('partials/header.ejs') %>
+
+    <body>
+
+        <%- include('partials/navbar.ejs',{isLoggedIn : isLoggedIn,token:token }) %>
+            <div class="container">
+                <%if( isLoggedIn ){ %>
+                    <h2 class="text-center mt-4">
+
+                        🙏 Hello ,
+                        <span class="text-danger">
+                            <%= username %>
+                        </span>
+
+                        welcome to MeraKart 🙏
+                    </h2>
+                    <% } else{%>
+                        <h2 class="text-center mt-4">Please <a href="/login"> login</a> to proceed.</h2>
+
+                        <% } %>
+
+
+                            <div class="row">
+                                <% products.forEach(e=>{ %>
+
+
+                                    <div class="col-md-4 my-3">
+                                        <div class="card my-3" style="margin-top:3vh ;">
+                                            <img src="<%=e.image%>" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h2 class="card-title">
+                                                    <%=e.name%>
+                                                </h2>
+                                                <h4>
+                                                    <%=e.price%>
+
+                                                </h4>
+                                                <p class="card-text">Some quick example text to build on the card
+                                                    title and make
+                                                    up the bulk of the card's content.</p>
+                                            </div>
+                                            <form action="/" method="post">
+
+                                                <input type="hidden" name="productid" value="<%=e.id%>">
+                                                <input type="hidden" name="userid" value="<%=username%>">
+                                                <input type="submit" style="float:left;margin-right: 2vw;"
+                                                    class="btn btn-primary" value="addtocart">
+                                            </form>
+
+
+                                            <form action="/viewdetails" method="post">
+                                                <a id="btn" class="btn btn-primary" href="/viewdetails/<%=e.id%>">View
+                                                    Details
+                                                </a>
+                                            </form>
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+                                    <% }) %>
+                            </div>
+                            <% if(maxpage>=pageNo) {%>
+                                <a class="my-3" href="/?pageNo=<%=pageNo %> ">
+                                    <button class="btn btn-info  mt-5">loadMoreProducts</button>
+                                </a>
+                                <% } %>
+            </div>
+            <script src="script.js"></script>
+    </body>
+
+</html>
