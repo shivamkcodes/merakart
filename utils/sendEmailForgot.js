@@ -20,9 +20,9 @@ module.exports = function (email, token, callback) {
         Subject: "Email verification",
         TextPart: "Greetings from Merakart",
         HTMLPart: `<h2>forgot password link ${token} </h2>
-          <a href="http://localhost:1900/forgot/${token}">click to change password</a>
+          <a href="${process.env.BASEURL}forgot/${token}">click to change password</a>
   
-          
+         
           `,
       },
     ],
