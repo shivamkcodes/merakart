@@ -20,7 +20,7 @@ module.exports = function (email, token, callback) {
         Subject: "Email verification",
         TextPart: "Greetings from Merakart",
         HTMLPart: `<p>token is plz verify this token ${token} </p>
-        <a href="http://localhost:1900/verifyuser/${token}">click to verify</a>
+        <a href="${process.env.BASEURL}/${token}">click to verify</a>
 
         
         `,

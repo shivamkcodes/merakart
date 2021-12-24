@@ -3,6 +3,7 @@ const getProducts = require("../utils/getproducts");
 
 const landing = (req, res) => {
   //console.log(req.session.token);
+  console.log(process.env.BASEURL);
 
   getProducts(function (err, products) {
     if (err) {
