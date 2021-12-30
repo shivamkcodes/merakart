@@ -3,6 +3,7 @@ const prod = [
     id: 1,
     name: "bra",
     price: "800",
+
     quantity: "12",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex possimus ipsum aut rem assumenda expedita minus eum aliquid eius modi molestias necessitatibus consectetur, accusamus sequi, nesciunt tempora laudantium dicta quod.",
     image: "https://source.unsplash.com/300x300/?bra,lingerie",

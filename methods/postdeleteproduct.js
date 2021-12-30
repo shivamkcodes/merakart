@@ -1,11 +1,12 @@
 const getProducts = require("../utils/getproducts");
-const writefile = require("../utils/writefile");
+
+const Products = require("../models/product");
 
 const deleteproduct = (req, res) => {
-  const productId = req.body.productid;
-  //console.log(productId);
+  const productname = req.body.productid;
+  console.log(productname);
 
-  if (!productId) {
+  if (!productname) {
     res.render("login", {
       error: "plz add product Id",
       isLoggedIn: req.session.isLoggedIn,
@@ -23,28 +24,36 @@ const deleteproduct = (req, res) => {
       return;
     }
 
-    const idx = products.findIndex(function (e) {
-      return e.id == productId;
-    });
-    //console.log(idx);
-
-    products.splice(idx, 1);
-
-    writefile("./DB/product.txt", JSON.stringify(products), (err) => {
+    Products.deleteOne({ name: productname }, (err, product) => {
       if (err) {
-        res.render("signup", {
-          error: "Error in fetching DB",
-          isLoggedIn: req.session.isLoggedIn,
-        });
-        return;
+        res.send(err);
       } else {
-        res.render("congratulation", {
-          msg: "product deleted Sucessfully",
-          isLoggedIn: req.session.isLoggedIn,
-          username: req.session.username,
-        });
+        res.send(product);
       }
     });
+
+    // const idx = products.findIndex(function (e) {
+    //   return e.id == productId;
+    // });
+    //console.log(idx);
+
+    //products.splice(idx, 1);
+
+    // writefile("./DB/product.txt", JSON.stringify(products), (err) => {
+    //   if (err) {
+    //     res.render("signup", {
+    //       error: "Error in fetching DB",
+    //       isLoggedIn: req.session.isLoggedIn,
+    //     });
+    //     return;
+    //   } else {
+    //     res.render("congratulation", {
+    //       msg: "product deleted Sucessfully",
+    //       isLoggedIn: req.session.isLoggedIn,
+    //       username: req.session.username,
+    //     });
+    //   }
+    // });
   });
 };
 

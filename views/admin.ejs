@@ -21,8 +21,7 @@
                         <fieldset>
                             <input required type="text" class="form-control" name="productName"
                                 placeholder="productName"><br>
-                            <input required type="text" class="form-control" name="productId"
-                                placeholder="productId"><br>
+
                             <input required type="text" class="form-control" name="productDescription"
                                 placeholder="productDescription"><br>
                             <input required type="tel" class="form-control" name="productPrice"
@@ -70,7 +69,7 @@
 
 
                                 <form action="/deleteproduct" method="post">
-                                    <input type="hidden" name="productid" value="<%=e.id%>">
+                                    <input type="hidden" name="productid" value="<%=e.name%>">
 
                                     <input type="submit" style="float:left;margin-right: 2vw;" class="btn btn-danger"
                                         value="delete">

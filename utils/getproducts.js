@@ -1,21 +1,27 @@
-const readFile = require("./readfile");
+const Products = require("../models/product");
 
 // this function will return array of users
 module.exports = function (callback) {
-  readFile("./DB/product.txt", function (err, data) {
-    if (err) {
+  Products.find({}, (err, products) => {
+    if (err || !products) {
       //error handling
-      callback("users not found");
+      callback("products not found");
       return;
+    } else {
+      callback(null, products);
     }
-    //console.log(data);
-
-    // let products = [];
-
-    if (data.length > 0) {
-      products = JSON.parse(data);
-    }
-
-    callback(null, products);
   });
+  // readFile("./DB/product.txt", function (err, data) {
+  //   if (err) {
+  //     //error handling
+  //     callback("users not found");
+  //     return;
+  //   }
+
+  //   if (data.length > 0) {
+  //     products = JSON.parse(data);
+  //   }
+
+  //   callback(null, products);
+  // });
 };

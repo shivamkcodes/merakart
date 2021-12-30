@@ -8,6 +8,7 @@ module.exports = function (req, res, next) {
         username: req.session.username,
       });
     }
+    // next();
   } else {
     res.redirect("/login");
   }

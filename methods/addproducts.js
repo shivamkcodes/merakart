@@ -1,12 +1,12 @@
-const writefile = require("../utils/writefile");
 const getProducts = require("../utils/getproducts");
+const Products = require("../models/product");
 
 const addproducts = (req, res) => {
   //console.log(req.body);
 
   const {
     productName,
-    productId,
+
     productDescription,
     productPrice,
     productQuantity,
@@ -14,7 +14,6 @@ const addproducts = (req, res) => {
   } = req.body;
   if (
     !productName ||
-    !productId ||
     !productDescription ||
     !productPrice ||
     !productQuantity ||
@@ -34,10 +33,9 @@ const addproducts = (req, res) => {
       return;
     }
 
-    console.log(typeof productsintxt);
+    //  console.log(productsintxt);
 
     const obj = {
-      id: productId,
       name: productName,
       quantity: productQuantity,
       price: productPrice,
@@ -45,13 +43,19 @@ const addproducts = (req, res) => {
       desc: productDescription,
     };
 
-    productsintxt.push(obj);
+    //  console.log(req.body, obj);
 
-    writefile("./DB/product.txt", JSON.stringify(productsintxt), (err) => {
+    const product = new Products(obj);
+    product.save((err, prod) => {
+      // if (err) {
+      //   return res.sendStatus(400).json({
+      //     err,
+      //   });
       if (err) {
         res.render("signup", {
           error: "Error in fetching DB",
           isLoggedIn: req.session.isLoggedIn,
+          username: req.session.username,
         });
         return;
       } else {
@@ -62,6 +66,22 @@ const addproducts = (req, res) => {
         });
       }
     });
+
+    // writefile("./DB/product.txt", JSON.stringify(productsintxt), (err) => {
+    //   if (err) {
+    //     res.render("signup", {
+    //       error: "Error in fetching DB",
+    //       isLoggedIn: req.session.isLoggedIn,
+    //     });
+    //     return;
+    //   } else {
+    //     res.render("congratulation.ejs", {
+    //       msg: "product added successfully",
+    //       isLoggedIn: req.session.isLoggedIn,
+    //       username: req.session.username,
+    //     });
+    //   }
+    // });
   });
 };
 

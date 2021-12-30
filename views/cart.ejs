@@ -15,9 +15,13 @@
                         <span class="text-danger">
                             <%= username %>
                         </span>
-                        welcome to the cart page
-                        🙏
 
+                        <% if(countProductInCart==0){ %>
+                            you haven't added anything to cart ,yet
+                            <% }else{ %>
+                                you have <%=countProductInCart%> Products in Cart
+                                    🙏
+                                    <%}%>
                     </h2>
                     <% } else{%>
                         <h2 class="text-center mt-4">Please <a href="/login"> login</a> to proceed.</h2>
@@ -27,68 +31,89 @@
 
                             <div class="row">
                                 <% products.forEach(e=>{ %>
+
                                     <% var v=e.id %>
-                                        <%cart[v]%>
-
-                                            <% if(cart[v]>=1) { %>
-
-                                                <div class="col-md-4 my-3">
-                                                    <div class="card my-3" style="margin-top:3vh ;">
-                                                        <img src="<%=e.image%>" class="card-img-top" alt="...">
-                                                        <div class="card-body">
-                                                            <h2 class="card-title">
-                                                                <%=e.name%>
-                                                            </h2>
-                                                            <h4>
-                                                                <%=e.price%>
-
-                                                            </h4>
-                                                            <h4> Quantity
-                                                                <% var v=e.id %>
-                                                                    <%=cart[v]%>
+                                        <% const idx=quantity.findIndex(function (e) { %>
+                                            <% return e.productid===v %>
+                                                <% }); %>
 
 
-                                                            </h4>
-                                                            <p class="card-text">Some quick example text to build on the
-                                                                card
-                                                                title and make
-                                                                up the bulk of the card's content.</p>
-                                                        </div>
-                                                        <form action="/cartplus" method="post">
+                                                    <%var test=quantity[idx].count%>
 
-                                                            <input type="hidden" name="productid" value="<%=e.id%>">
-                                                            <input type="hidden" name="username" value="<%=username%>">
-                                                            <input type="submit" style="float:left;margin-right: 2vw;"
-                                                                class="btn btn-primary" value="+">
-                                                        </form>
-                                                        <form action="/cartminus" method="post">
+                                                        <% if (test>=1){ %>
 
-                                                            <input type="hidden" name="productid" value="<%=e.id%>">
-                                                            <input type="hidden" name="username" value="<%=username%>">
-                                                            <input type="submit" style="float:left;margin-right: 2vw;"
-                                                                class="btn btn-primary" value="-">
-                                                        </form>
+                                                            <div class="col-md-4 my-3">
+                                                                <div class="card my-3" style="margin-top:3vh ;">
+                                                                    <img src="<%=e.image%>" class="card-img-top"
+                                                                        alt="...">
+                                                                    <div class="card-body">
+                                                                        <h2 class="card-title">
+                                                                            <%=e.name%>
+                                                                        </h2>
+                                                                        <h4>
+                                                                            <%=e.price%>
 
-
-                                                        <form action="/viewdetails" method="post">
-                                                            <a id="btn" class="btn btn-primary"
-                                                                href="/viewdetails/<%=e.id%>">View
-                                                                Details
-                                                            </a>
-                                                        </form>
+                                                                        </h4>
+                                                                        <h4> Quantity
+                                                                            <% var v=e.id %>
+                                                                                <% const idx=quantity.findIndex(function
+                                                                                    (e) { %>
+                                                                                    <% return e.productid===v %>
+                                                                                        <% }); %>
 
 
-                                                    </div>
-                                                </div>
+                                                                                            <%=quantity[idx].count%>
 
 
 
+                                                                        </h4>
+                                                                        <p class="card-text">Some quick example text to
+                                                                            build on the
+                                                                            card
+                                                                            title and make
+                                                                            up the bulk of the card's content.</p>
+                                                                    </div>
+                                                                    <form action="/cartplus" method="post">
 
-                                                <% } %>
+                                                                        <input type="hidden" name="productid"
+                                                                            value="<%=e.id%>">
+                                                                        <input type="hidden" name="username"
+                                                                            value="<%=username%>">
+                                                                        <input type="submit"
+                                                                            style="float:left;margin-right: 2vw;"
+                                                                            class="btn btn-primary" value="+">
+                                                                    </form>
+                                                                    <form action="/cartminus" method="post">
+
+                                                                        <input type="hidden" name="productid"
+                                                                            value="<%=e.id%>">
+                                                                        <input type="hidden" name="username"
+                                                                            value="<%=username%>">
+                                                                        <input type="submit"
+                                                                            style="float:left;margin-right: 2vw;"
+                                                                            class="btn btn-primary" value="-">
+                                                                    </form>
+
+
+                                                                    <form action="/viewdetails" method="post">
+                                                                        <a id="btn" class="btn btn-primary"
+                                                                            href="/viewdetails/<%=e.id%>">View
+                                                                            Details
+                                                                        </a>
+                                                                    </form>
+
+
+                                                                </div>
+                                                            </div>
+
+                                                            <%} %>
 
 
 
-                                                    <% }) %>
+
+
+
+                                                                <% }) %>
                             </div>
 
             </div>

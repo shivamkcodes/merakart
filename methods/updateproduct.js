@@ -24,8 +24,9 @@ const updateproduct = (req, res) => {
     const idx = products.findIndex(function (e) {
       return e.id == productid;
     });
+    console.log("this is", idx);
 
-    //console.log(products[idx]);
+    // console.log(products[idx]);
     const id = products[idx].id;
     const name = products[idx].name;
     const price = products[idx].price;

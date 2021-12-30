@@ -2,17 +2,25 @@ const express = require("express");
 const session = require("express-session");
 const cors = require("cors");
 const app = express();
+const mongoose = require("mongoose");
 require("dotenv").config();
 const port = process.env.PORT || 1900;
 
+//connection with mongoDb
+mongoose
+  .connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("DB connected is already done");
+  })
+  .catch((err) => {
+    console.log("Error is", err);
+  });
+
 // utilFunction
-const readfile = require("./utils/readfile");
-const writefile = require("./utils/writefile");
-const sendEmail = require("./utils/sendEmail");
-const sendEmailForgot = require("./utils/sendEmailForgot");
-const passwordVali = require("./utils/passwordValidator");
-const sendMailCongo = require("./utils/sendEmailCongratulaions");
-const getProducts = require("./utils/getproducts");
+
 const checkauth = require("./middlewares/checkauth");
 const adminvalidation = require("./middlewares/adminvalidation");
 const landing = require("./methods/landing");
