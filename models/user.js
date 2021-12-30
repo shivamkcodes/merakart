@@ -35,12 +35,10 @@ const userSchema = mongoose.Schema({
     type: String,
     trim: true,
     default: Date.now(),
-    required: true,
   },
   cart: {
     type: Array,
     default: [],
-    unique: true,
   },
   mobile: {
     type: Number,
