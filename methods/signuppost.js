@@ -39,7 +39,7 @@ const signuppost = (req, res) => {
   user.save((err, user) => {
     if (err) {
       res.render("signup", {
-        error: "Not able to save our user in DB...",
+        error: err,
         isLoggedIn: req.session.isLoggedIn,
       });
       return;
