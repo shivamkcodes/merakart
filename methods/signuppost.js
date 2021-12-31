@@ -1,13 +1,13 @@
 const sendEmail = require("../utils/sendEmail");
 const passwordVali = require("../utils/passwordValidator");
-
+const FakeUser = require("../models/fakeuser");
 const User = require("../models/user");
 
 const signuppost = (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
 
   const { email, username, password, mobile, confirmPassword } = req.body;
-  console.log(email);
+  //  console.log(email);
 
   if (!email || !username || !password || !mobile || !confirmPassword) {
     res.render("signup", {
@@ -34,31 +34,62 @@ const signuppost = (req, res) => {
     return;
   }
 
-  const user = new User(req.body);
+  User.find(
+    {
+      $or: [
+        {
+          email,
+        },
+        {
+          username,
+        },
+      ],
+    },
+    (err, data) => {
+      if (err) {
+        console.log("err Db");
 
-  user.save((err, user) => {
-    if (err) {
-      res.render("signup", {
-        error: err,
-        isLoggedIn: req.session.isLoggedIn,
-      });
-      return;
-    } else {
-      console.log(email);
-      sendEmail(email, user.token, function (err, data) {
-        console.log("email data", data, err);
-      });
-      res.redirect("/login");
+        res.render("signup", {
+          error: "username already taken",
+          isLoggedIn: req.session.isLoggedIn,
+        });
+        return;
+      } else if (data.length == 0) {
+        const user = new FakeUser(req.body);
+        sendEmail(email, user.token, function (err, data) {
+          console.log("email data", data, err);
+        });
+        user.save((err, user) => {
+          if (err) {
+            res.render("signup", {
+              error: err,
+              isLoggedIn: req.session.isLoggedIn,
+            });
+            return;
+          } else {
+            console.log(email);
+            res.render("middle.ejs");
+          }
+        });
+      } else {
+        console.log("else part", data.length);
+
+        res.render("signup", {
+          error: "username already taken",
+          isLoggedIn: req.session.isLoggedIn,
+        });
+        return;
+      }
     }
+  );
 
-    // res.json(user);
-    // res.json({
-    //   username: user.username,
-    //   email: user.email,
-    //   mobile: user.mobile,
-    //   id: user._id,
-    // });
-  });
+  // res.json(user);
+  // res.json({
+  //   username: user.username,
+  //   email: user.email,
+  //   mobile: user.mobile,
+  //   id: user._id,
+  // });
 
   // readfile("./DB/auth.txt", (err, data) => {
   //   if (err) {

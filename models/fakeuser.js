@@ -1,17 +1,15 @@
 const mongoose = require("mongoose");
 const { nanoid } = require("nanoid");
-const userSchema = mongoose.Schema({
+const fakeUserSchema = mongoose.Schema({
   email: {
     type: String,
     required: true,
     trim: true,
-    unique: true,
   },
   username: {
     type: String,
     required: true,
     trim: true,
-    unique: true,
   },
   password: {
     type: String,
@@ -36,10 +34,7 @@ const userSchema = mongoose.Schema({
     trim: true,
     default: () => nanoid(10),
   },
-  cart: {
-    type: Array,
-    default: [],
-  },
+
   mobile: {
     type: Number,
     required: true,
@@ -47,4 +42,4 @@ const userSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("FakeUser", fakeUserSchema);

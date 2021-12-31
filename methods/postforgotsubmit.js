@@ -4,6 +4,8 @@ const User = require("../models/user");
 
 const postforgotsubmit = (req, res) => {
   const email = req.body.email;
+  console.log(email);
+
   if (!email) {
     res.render("forgot", {
       isLoggedIn: req.session.isLoggedIn,

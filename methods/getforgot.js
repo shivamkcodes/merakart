@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 const getforgot = (req, res) => {
-  // console.log("hit");
+  console.log("hit");
 
   const token = req.params.token;
 
@@ -18,6 +18,8 @@ const getforgot = (req, res) => {
         });
         return;
       } else {
+        console.log("data is", data);
+
         req.session.username = data.username;
 
         res.render("changepassword", {

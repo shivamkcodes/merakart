@@ -1,9 +1,10 @@
 const User = require("../models/user");
+const FakeUser = require("../models/fakeuser");
 
 const verifyuser = (req, res) => {
   var tk = req.params.token;
   console.log(tk);
-  User.findOneAndUpdate(
+  FakeUser.findOneAndUpdate(
     {
       token: tk,
     },
@@ -15,7 +16,7 @@ const verifyuser = (req, res) => {
     {
       new: true,
     },
-    (err, purchase) => {
+    (err, updateduser) => {
       if (err) {
         res.render("signup", {
           error: err,
@@ -23,8 +24,32 @@ const verifyuser = (req, res) => {
         });
         return;
       } else {
+        //console.log(updateduser);
+        var testobj = {
+          email: updateduser.email,
+          username: updateduser.username,
+          password: updateduser.password,
+          confirmPassword: updateduser.confirmPassword,
+          mobile: updateduser.mobile,
+          isVerified: true,
+        };
+        const user = new User(testobj);
+        user.save((err, user) => {
+          if (err) {
+            res.render("signup", {
+              error: err,
+              isLoggedIn: req.session.isLoggedIn,
+            });
+            return;
+          } else {
+            console.log("saved to orignal Db");
+
+            res.redirect("/login");
+          }
+        });
+
         req.session.isVerified = true;
-        res.redirect("/");
+        // res.redirect("/");
       }
     }
   );
