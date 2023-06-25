@@ -24,7 +24,7 @@ const postaddtocart = (req, res) => {
         });
         // console.log(idx);
         if (idx == -1) {
-          var newCartArray = [{ productid, count: 1 }];
+          var newCartArray = { productid, count: 1 };
 
           Users.updateOne(
             { username: userid },
