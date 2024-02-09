@@ -8,7 +8,7 @@ module.exports = function (email, token, callback) {
     Messages: [
       {
         From: {
-          Email: "socializing.on.vocals@gmail.com",
+          Email: "impriyankaguglani@gmail.com",
           Name: "SOV",
         },
         To: [
